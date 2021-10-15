@@ -18,7 +18,7 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                 first = line[2].lower()
                 number = line[4]
                 office = line[3]
-                department = line[5]
+                department = line[5].lower()
                 group = line[6]
                 password = "1$4pizz@"
                 
@@ -61,12 +61,11 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                     os.system(f"echo {password} | passwd --stdin {name}")
                     os.system(f"passwd --expire {name}")
                     os.system("sleep 2")
-                elif(group == "area51"):
+                elif(group == "area51"): # case that area51 is not a valid group
                     print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "not a valid group" + "\33[0m" + ".")
                 else:
                     print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "Insufficient information" + "\33[0m" + ".")
 
-                # add an elif to judge each part whether its empty or not
     read.close() # try and see if it actually closes
 def main():
     os.system("clear")
