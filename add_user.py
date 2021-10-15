@@ -46,6 +46,7 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
 
                 # Creates directory for each department e.g: /home/ceo/nrichardson
                 directory = f"/home/{department}/{name}"
+                os.system()
 
                 shell = ""
                 if(group == "office"): # Any member of office should use csh 
@@ -53,15 +54,17 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                 else:
                     shell = "/bin/bash"
 
-                if(eid != "" and last != "" and first != "" and department != ""):
+                if(eid != "" and last != "" and first != "" and department != "" and number != ""):
                     print("Processing employee ID " + eid + "." + "\t\t" + "\33[92m" + name + "\33[0m" + " added to system.\n")
-                    os.system("sudo mkdir -p " + directory)
-                    os.system(f"sudo useradd -m -s {shell} -d {directory} -G {group} {name}")
+                    os.system("mkdir -p " + directory)
+                    os.system(f"sudo useradd -m -s {shell} -d {directory} -G {group} {name}") 
                     # os.system("sudo usermod --password password")
-                    os.system(f"sudo echo {password} | passwd --stdin {name}")
+                    os.system(f"echo {password} | passwd --stdin {name}")
                     os.system(f"passwd --expire {name}") # sets password to expire will prompt to make a new one
                     os.system("sleep 2")
                 elif(group == "area51"): # case that area51 is not a valid group
+                    print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "not a valid group" + "\33[0m" + ".")
+                elif(group == "area 51" and number == ""):
                     print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "not a valid group" + "\33[0m" + ".")
                 else:
                     print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "Insufficient information" + "\33[0m" + ".")
