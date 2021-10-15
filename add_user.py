@@ -20,7 +20,7 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                 office = line[3]
                 department = line[5]
                 group = line[6]
-                password = "password"
+                password = "1$4pizz@"
                 
                 if(len(first) > 0):
                     name = first[0] + last
@@ -45,7 +45,7 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                     os.system("sudo groupadd " + group)
 
                 # Creates directory for each department e.g: /home/ceo/nrichardson
-                directory = "/home/" + department.lower() + "/" + name
+                directory = f"/home/{department}/{name}"
 
                 shell = ""
                 if(group == "office"): # Any member of office should use csh 
@@ -56,11 +56,16 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                 if(eid != "" and last != "" and first != "" and department != ""):
                     print("Processing employee ID " + eid + "." + "\t\t" + "\33[92m" + name + "\33[0m" + " added to system.\n")
                     os.system("sudo mkdir -p " + directory)
-                    os.system("sudo useradd " + name + " -g " + group + " --create-home --home-dir " + directory + " -s " + shell + " -p " + "password")
-                    os.system("sudo chage -d 0 " + name)  # Expires the users password forcing them to change it upon creation
+                    os.system(f"useradd -m -s {shell} -d {directory} -G {group} {name}")
+                    # os.system("sudo usermod --password password")
+                    os.system(f"echo {password} | passwd --stdin {name}")
+                    os.system(f"passwd --expire {name}")
                     os.system("sleep 2")
+                elif(group == "area51"):
+                    print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "not a valid group" + "\33[0m" + ".")
                 else:
                     print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "Insufficient information" + "\33[0m" + ".")
+
                 # add an elif to judge each part whether its empty or not
     read.close() # try and see if it actually closes
 def main():
