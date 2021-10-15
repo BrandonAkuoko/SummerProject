@@ -46,7 +46,6 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
 
                 # Creates directory for each department e.g: /home/ceo/nrichardson
                 directory = f"/home/{department}/{name}"
-                os.system()
 
                 shell = ""
                 if(group == "office"): # Any member of office should use csh 
@@ -69,7 +68,7 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                 else:
                     print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "Insufficient information" + "\33[0m" + ".")
 
-    read.close() # try and see if it actually closes
+    #read.close() # try and see if it actually closes
 def main():
     os.system("clear")
     print("Adding users to the system\n")
