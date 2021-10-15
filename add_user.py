@@ -20,7 +20,7 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                 office = line[3]
                 department = line[5].lower()
                 group = line[6]
-                password = "1$4pizz@"
+                password = "password"
                 
                 if(len(first) > 0):
                     name = first[0] + last
@@ -56,10 +56,10 @@ def fileReader(file): #fileReader takes in a file that is opened and read and sp
                 if(eid != "" and last != "" and first != "" and department != ""):
                     print("Processing employee ID " + eid + "." + "\t\t" + "\33[92m" + name + "\33[0m" + " added to system.\n")
                     os.system("sudo mkdir -p " + directory)
-                    os.system(f"useradd -m -s {shell} -d {directory} -G {group} {name}")
+                    os.system(f"sudo useradd -m -s {shell} -d {directory} -G {group} {name}")
                     # os.system("sudo usermod --password password")
-                    os.system(f"echo {password} | passwd --stdin {name}")
-                    os.system(f"passwd --expire {name}")
+                    os.system(f"sudo echo {password} | passwd --stdin {name}")
+                    os.system(f"passwd --expire {name}") # sets password to expire will prompt to make a new one
                     os.system("sleep 2")
                 elif(group == "area51"): # case that area51 is not a valid group
                     print("Could not process employee ID " + eid + "." + "\t\t" + "\33[91m" + "not a valid group" + "\33[0m" + ".")
