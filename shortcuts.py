@@ -12,7 +12,7 @@ def code1():
         home = p.expanduser("~")
         short = input("Please enter the file name to create a shortcut: ")
         try:
-           pathfind = find_file(short) # should check and see if the file exist, if it does not then the excepetion should handle it
+           pathfind,status = find_file(short) # should check and see if the file exist, if it does not then the excepetion should handle it
         except:
             print("Seaching, please wait...\n")
             print("Sorry, couldn't find " + '\033[31m' + short + '\033[0m' + "!\n Returning to Main Menu") 
@@ -24,6 +24,7 @@ def code1():
                 if check_link(short):
                     print("Symlink already exist, returning to Main menu")
                     #exit(1)
+                print(pathfind) # want to check what is in here
                 os.symlink(pathfind, home + "/" + short)
                 print("Shortcut created. Returning to Main Menu")
                 #exit(1)
@@ -58,7 +59,7 @@ def code3():
     home = p.expanduser('~')
     print("\033[92m" + "Shortcut Report" + "\033[0m" + "\n\n")
     print("Your current directory is " + '\033[93m' + home + "\033[0m" + ".\n\n")
-    temp =  sym_links(home)
+    temp = sym_links(home)
     print("The number of symbolic links is " + '\033[93m' + str(len(temp)) + "\033[0m" + ".\n")
     print('\033[93m' + "Symbolic Link" + "\033[0m" + '\t\t' + '\033[93m' + "Target Path" + '\033[0m')
     for space in temp:
