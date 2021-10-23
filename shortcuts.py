@@ -83,11 +83,11 @@ def code3():
     home = p.expanduser('~')
     print("\033[92m" + "Shortcut Report" + "\033[0m" + "\n\n")
     print("Your current directory is " + '\033[93m' + home + "\033[0m" + ".\n\n")
-    symlink(home)
-    print("The number of symbolic links is " + '\033[93m' + str(len(lPaths)) + "\033[0m" + ".\n")
+    temp =  symlink(home)
+    print("The number of symbolic links is " + '\033[93m' + str(len(temp)) + "\033[0m" + ".\n")
     print('\033[93m' + "Symbolic Link" + "\033[0m" + '\t\t' + '\033[93m' + "Target Path" + '\033[0m')
 
-    for space in lPaths:
+    for space in temp:
         print(space[0] + '\t\t' + space[1])
     print('\n')
     enter = input("To return to the Main Menu hit ENTER.")
@@ -113,8 +113,7 @@ def sym_links():
                 sl.append(file) # appends the file
                 sl.append(os.readlink(lpath)) # also adds the file path to the list
                 pathlist.append(sl)
-
-
+    return lpath
 
 def main():
     code = ""
