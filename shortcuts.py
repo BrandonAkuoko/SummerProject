@@ -6,7 +6,7 @@ import os
 import subprocess
 import os.path as p
 from pathlib import Path
-from nt import link
+#from nt import link
 #import netifaces
 
 def check_link(choice):
@@ -49,10 +49,10 @@ def code1():
                 print("Creating Shortcut, please wait.\n")
                 if check_link(short):
                     print("Symlink already exist, returning to Main menu")
-                    exit(1)
+                    #exit(1)
                 os.symlink(pathfind, home + "/" + short)
                 print("Shortcut created. Returning to Main Menu")
-                exit(1)
+                #exit(1)
             else:
                 print("\nYou entered an invalid option\n")
 
@@ -74,7 +74,8 @@ def code2():
             os.system("sleep 2")
             print("Link removed, returning to Main Menu")
             os.system("sleep 3")
-            exit(1)
+            #exit(1)
+            break
         else:
             print("\nYou entered an invalid option!\n")
 
