@@ -34,7 +34,7 @@ def code2():
     os.system("clear")
     remove = input("Please enter the shortcut you wish to remove:\t")
     try:
-        pathfind = find_file(remove)
+        pathfind,status = find_file(remove)
     except FileNotFoundError:
         print("Seaching, please wait...\n")
         print("Sorry, couldn't find " + '\033[31m' + remove + '\033[0m' + "!\n Returning to Main Menu") 
