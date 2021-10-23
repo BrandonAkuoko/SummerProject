@@ -9,9 +9,8 @@ from pathlib import Path
 #import netifaces
 
 code = ""
-global path
-global lPaths
-global link
+
+
 home = os.path.expanduser("~")
 
 while code != "quit":
@@ -30,6 +29,7 @@ while code != "quit":
         os.system("sleep 3")
         os.system("clear")
     if code == "1":
+        global path
         os.system("clear")
         short = input("Please enter the file name to create a shortcut: ")
         try:
@@ -106,11 +106,13 @@ def check_link(choice):
 
 
 def symlink(directory):
+    global lPaths
 	lPaths = []
 	for folder, subfolder, file in os.walk(directory) :
 		# Get files
 		for f in file :
 			link = p.join(folder, f)
+            global link
 			links = []
 			if p.islink(link):
 				links.append(f)
