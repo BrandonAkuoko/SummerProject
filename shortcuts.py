@@ -6,33 +6,7 @@ import os
 import subprocess
 import os.path as p
 from pathlib import Path
-#from nt import link
-#import netifaces
 
-def check_link(choice):
-	for folder, subfolder, file in os.walk("/"):
-		for f in file:
-			filep = p.join(folder, f)
-			if f == choice:
-				if p.islink(filep):
-					return True
-	return False
-
-def symlink(directory):
-    #syntax
-    #global lPaths
-	lPaths = []
-	for folder, subfolder, file in os.walk(directory) :
-		# Get files
-		for f in file:
-            
-			link = p.join(folder, f)
-            
-			links = []
-			if p.islink(link):
-				links.append(f)
-				links.append(os.readlink(link))
-				lPaths.append(links)
 def code1():
         os.system("clear")
         home = p.expanduser("~")
@@ -84,15 +58,22 @@ def code3():
     home = p.expanduser('~')
     print("\033[92m" + "Shortcut Report" + "\033[0m" + "\n\n")
     print("Your current directory is " + '\033[93m' + home + "\033[0m" + ".\n\n")
-    temp =  symlink(home)
+    temp =  sym_links(home)
     print("The number of symbolic links is " + '\033[93m' + str(len(temp)) + "\033[0m" + ".\n")
     print('\033[93m' + "Symbolic Link" + "\033[0m" + '\t\t' + '\033[93m' + "Target Path" + '\033[0m')
-
     for space in temp:
         print(space[0] + '\t\t' + space[1])
     print('\n')
     enter = input("To return to the Main Menu hit ENTER.")
 
+def check_link(choice):
+	for folder, subfolder, file in os.walk("/"):
+		for f in file:
+			filep = p.join(folder, f)
+			if f == choice:
+				if p.islink(filep):
+					return True
+	return False
 
 def find_file(text):
     global pathfind
@@ -102,10 +83,10 @@ def find_file(text):
                 pathfind = p.join(root, file) # path is joined
                 return True # when the file is found function returns true
 
-def sym_links():
+def sym_links(dir):
     global pathlist
     pathlist = []
-    home = p.expanduser('~')
+    #home = p.expanduser('~')
     for root, dirs, files in os.walk(home):
         for file in files:
             global lpath
@@ -115,7 +96,7 @@ def sym_links():
                 sl.append(file) # appends the file
                 sl.append(os.readlink(lpath)) # also adds the file path to the list
                 pathlist.append(sl)
-    return lpath
+    return pathlist
 
 def main():
     code = ""
