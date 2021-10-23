@@ -105,7 +105,8 @@ def find_file(text):
 def sym_links():
     global pathlist
     pathlist = []
-    for root, dirs, files in os.walk("/"):
+    home = p.expanduser('~')
+    for root, dirs, files in os.walk(home):
         for file in files:
             global lpath
             lpath = p.join(root, file)
