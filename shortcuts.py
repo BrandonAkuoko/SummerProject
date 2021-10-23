@@ -12,7 +12,7 @@ def code1():
         home = p.expanduser("~")
         short = input("Please enter the file name to create a shortcut: ")
         try:
-           find_file(short) # should check and see if the file exist, if it does not then the excepetion should handle it
+           pathfind = find_file(short) # should check and see if the file exist, if it does not then the excepetion should handle it
         except:
             print("Seaching, please wait...\n")
             print("Sorry, couldn't find " + '\033[31m' + short + '\033[0m' + "!\n Returning to Main Menu") 
@@ -34,7 +34,7 @@ def code2():
     os.system("clear")
     remove = input("Please enter the shortcut you wish to remove:\t")
     try:
-        find_file(remove)
+        pathfind = find_file(remove)
     except FileNotFoundError:
         print("Seaching, please wait...\n")
         print("Sorry, couldn't find " + '\033[31m' + remove + '\033[0m' + "!\n Returning to Main Menu") 
@@ -81,7 +81,7 @@ def find_file(text):
         for file in files:
             if file == text: # if the file is found 
                 pathfind = p.join(root, file) # path is joined
-                return True # when the file is found function returns true
+                return pathfind,True # when the file is found function returns true
 
 def sym_links(dir):
     global pathlist
