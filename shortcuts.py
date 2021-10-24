@@ -76,7 +76,13 @@ def check_link(choice):
 			if f == choice:
 				if p.islink(filep):
 					return True
-	return False
+                else:
+                    print("Seaching, please wait...\n")
+                    print("Sorry, couldn't find " + '\033[31m' + choice + '\033[0m' + "!\n Returning to Main Menu")
+                    os.system("sleep 3")
+        print("Seaching, please wait...\n")
+        print("Sorry, couldn't find " + '\033[31m' + choice + '\033[0m' + "!\n Returning to Main Menu")
+        os.system("sleep 3")
 
 def find_file(text):
     global pathfind
@@ -99,7 +105,7 @@ def sym_links(dir):
                 sl.append(file) # appends the file
                 sl.append(os.readlink(lpath)) # also adds the file path to the list
                 pathlist.append(sl)
-    return pathlist
+    return pathlist # returns the list of paths and the links
 
 def main():
     code = ""
