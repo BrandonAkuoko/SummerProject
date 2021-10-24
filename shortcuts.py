@@ -14,7 +14,7 @@ def code1():
         try:
            pathfind,status = find_file(short) # should check and see if the file exist, if it does not then the excepetion should handle it
         except:
-            print("Seaching, please wait...\n")
+            print("Searching, please wait...\n")
             print("Sorry, couldn't find " + '\033[31m' + short + '\033[0m' + "!\n Returning to Main Menu") 
             os.system("sleep 3")
             status = False # should never get to the while loop in this case
@@ -39,11 +39,12 @@ def code2():
     try:
         pathfind,status = find_file(remove) # two variables 
     except FileNotFoundError: #error handler 
-        print("Seaching, please wait...\n")
+        print("Searching, please wait...\n")
         print("Sorry, couldn't find " + '\033[31m' + remove + '\033[0m' + "!\n Returning to Main Menu") 
-    os.system("sleep 3")
+        os.system("sleep 3")
+        status = False
         #break # subject to change
-    while(1): # yes loop 
+    while(status == True): # yes loop 
         choice = input("Are you sure you want to remove " + '\033[92m' + remove + '\033[0m' + "? Select Y/y to confirm.")
         if choice == "Y" or choice == "y":
             print("Removing link, please wait...\n")
@@ -52,6 +53,7 @@ def code2():
             print("Link removed, returning to Main Menu")
             os.system("sleep 3")
             #exit(1)
+            status = False
             break
         else:
             print("\nYou entered an invalid option!\n")
@@ -85,9 +87,11 @@ def find_file(text):
             if file == text: # if the file is found 
                 pathfind = p.join(root, file) # path is joined
                 return pathfind,True # when the file is found function returns true
-    print("Seaching, please wait...\n")
-    print("Sorry, couldn't find " + '\033[31m' + text + '\033[0m' + "!\n Returning to Main Menu")
-    os.system("sleep 3") 
+            if file != text:
+                print("Searching, please wait...\n")
+                print("Sorry, couldn't find " + '\033[31m' + text + '\033[0m' + "!\n Returning to Main Menu")
+                os.system("sleep 3")
+                return 0, False
 
 def sym_links(dir):
     global pathlist
