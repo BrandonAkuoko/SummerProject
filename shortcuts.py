@@ -72,13 +72,14 @@ def code3():
     enter = input("To return to the Main Menu hit ENTER.")
 
 def check_link(choice):
-    for folder, subfolder, file in os.walk("/"):
-		for f in file:
-			filep = p.join(folder, f)
-			if f == choice:
-				if p.islink(filep):
-					return True
-    return False
+    for folder, subfolder, file in os.walk('/'):
+        for f in file:
+            filepath = p.join(folder, f)
+            if f == choice:
+                if p.islink(filepath):
+                    return True
+                return False
+
 
 def find_file(text):
     global pathfind
