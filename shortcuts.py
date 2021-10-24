@@ -76,10 +76,6 @@ def check_link(choice):
 			if f == choice:
 				if p.islink(filep):
 					return True
-                else:
-                    print("Seaching, please wait...\n")
-                    print("Sorry, couldn't find " + '\033[31m' + choice + '\033[0m' + "!\n Returning to Main Menu")
-                    os.system("sleep 3")
         print("Seaching, please wait...\n")
         print("Sorry, couldn't find " + '\033[31m' + choice + '\033[0m' + "!\n Returning to Main Menu")
         os.system("sleep 3")
