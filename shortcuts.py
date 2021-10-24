@@ -70,15 +70,13 @@ def code3():
     enter = input("To return to the Main Menu hit ENTER.")
 
 def check_link(choice):
-	for folder, subfolder, file in os.walk("/"):
+    for folder, subfolder, file in os.walk("/"):
 		for f in file:
 			filep = p.join(folder, f)
 			if f == choice:
 				if p.islink(filep):
 					return True
-        print("Seaching, please wait...\n")
-        print("Sorry, couldn't find " + '\033[31m' + choice + '\033[0m' + "!\n Returning to Main Menu")
-        os.system("sleep 3")
+    return False
 
 def find_file(text):
     global pathfind
@@ -87,6 +85,9 @@ def find_file(text):
             if file == text: # if the file is found 
                 pathfind = p.join(root, file) # path is joined
                 return pathfind,True # when the file is found function returns true
+    print("Seaching, please wait...\n")
+    print("Sorry, couldn't find " + '\033[31m' + text + '\033[0m' + "!\n Returning to Main Menu")
+    os.system("sleep 3") 
 
 def sym_links(dir):
     global pathlist
