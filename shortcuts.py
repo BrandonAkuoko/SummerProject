@@ -17,31 +17,33 @@ def code1():
             print("Seaching, please wait...\n")
             print("Sorry, couldn't find " + '\033[31m' + short + '\033[0m' + "!\n Returning to Main Menu") 
             os.system("sleep 3")
-        finally:
-            choice = input("Found "+ '\033[92m' + str(pathfind) + '\033[0m' + ". Select Y/y to create shortcut. ")
+            status = False # should never get to the while loop in this case
+        while(status == True): # makes sure that this is executed if the status is true
+            choice = input("Found "+ '\033[92m' + str(pathfind) + '\033[0m' + ". Select Y/y to create shortcut. ") # confirms the file was found
             if choice == "Y" or choice == "y":
                 print("Creating Shortcut, please wait.\n")
-                if check_link(short):
+                if check_link(short): # check to see if the link exist 
                     print("Symlink already exist, returning to Main menu")
                     #exit(1)
                 print(pathfind) # want to check what is in here
-                os.symlink(pathfind, home + "/" + short)
+                os.symlink(pathfind, home + "/" + short) # creates the symlink
                 print("Shortcut created. Returning to Main Menu")
+                status = False # status set to false ends loop
                 #exit(1)
             else:
-                print("\nYou entered an invalid option\n")
+                print("\nYou entered an invalid option\n") # option bad try again
 
 def code2():
     os.system("clear")
-    remove = input("Please enter the shortcut you wish to remove:\t")
+    remove = input("Please enter the shortcut you wish to remove:\t") # Removes the file 
     try:
-        pathfind,status = find_file(remove)
-    except FileNotFoundError:
+        pathfind,status = find_file(remove) # two variables 
+    except FileNotFoundError: #error handler 
         print("Seaching, please wait...\n")
         print("Sorry, couldn't find " + '\033[31m' + remove + '\033[0m' + "!\n Returning to Main Menu") 
     os.system("sleep 3")
         #break # subject to change
-    while(1):
+    while(1): # yes loop 
         choice = input("Are you sure you want to remove " + '\033[92m' + remove + '\033[0m' + "? Select Y/y to confirm.")
         if choice == "Y" or choice == "y":
             print("Removing link, please wait...\n")
@@ -56,10 +58,10 @@ def code2():
 
 def code3():
     os.system("clear")
-    home = p.expanduser('~')
+    home = p.expanduser('~') # home dir
     print("\033[92m" + "Shortcut Report" + "\033[0m" + "\n\n")
     print("Your current directory is " + '\033[93m' + home + "\033[0m" + ".\n\n")
-    temp = sym_links(home)
+    temp = sym_links(home) # checks to see if its a present symlink
     print("The number of symbolic links is " + '\033[93m' + str(len(temp)) + "\033[0m" + ".\n")
     print('\033[93m' + "Symbolic Link" + "\033[0m" + '\t\t' + '\033[93m' + "Target Path" + '\033[0m')
     for space in temp:
@@ -88,7 +90,7 @@ def sym_links(dir):
     global pathlist
     pathlist = []
     #home = p.expanduser('~')
-    for root, dirs, files in os.walk(home):
+    for root, dirs, files in os.walk(dir):
         for file in files:
             global lpath
             lpath = p.join(root, file)
