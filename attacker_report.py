@@ -17,7 +17,7 @@ print("\33[91m" + "COUNT\t\tIP ADDRESS\t\tCOUNTRY" + "\33[0m" + '\n') #secondary
 with open("/home/student/scripts/script04/syslog.log") as file: # Reads the syslog 
     lines = file.readlines() # reads line for line in the syslog
     for line in lines:
-        ip = re.findall(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})') # declaring the regex pattern for IP addresses
+        ip = re.findall(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', line) # declaring the regex pattern for IP addresses
         if len(ip) != 0:
             temp = ip[0]
             if temp in holder: # if the ip is present in the holder
@@ -27,5 +27,5 @@ with open("/home/student/scripts/script04/syslog.log") as file: # Reads the sysl
 holder = sorted(holder.items(), key = lambda temp: temp[1], reverse=False) # sorts in ascending order
 for temp in holder:
     if temp[1] >= 10: # Has to track for 10 or more fails
-        lookup = geolite2.lookup(temp[1]) # is going to connect the ip to the country
-        print(temp[1], '\t', temp[0], '\t', lookup.country)
+        lookup = geolite2.lookup(temp[0]) # is going to connect the ip to the country
+        print(temp[1], '\t\t', temp[0], '\t\t', lookup.country)
